@@ -88,7 +88,7 @@ void login()
     {
     case 1:
     {
-        cout << "Login Success (Admin)" << endl;
+        cout << GREEN << "Login Successfully in Admin ..." << RESET << endl;
         Admin a1;
         string name;
         int price;
@@ -124,10 +124,10 @@ void login()
                 // Implement manage employees functionality
                 break;
             case 7:
-                cout << "Exiting Admin Menu..." << endl;
+                cout << RED << "Exiting Admin Menu..." << RESET << endl;
                 return; // Exit the loop and return
             default:
-                cout << "Invalid choice, please try again." << endl;
+                cout << RED << "Invalid choice, please try again." << RESET << endl;
                 break;
             }
         }
@@ -136,7 +136,7 @@ void login()
 
     case 2:
     {
-        cout << "Login Success (Employer)" << endl;
+        cout << GREEN << "Login Successfully in Employer ..." << RESET << endl;
         Employee e1;
         string name;
         int price;
@@ -164,10 +164,10 @@ void login()
                 // Implement manage users functionality
                 break;
             case 5:
-                cout << "Exiting Employer Menu..." << endl;
+                cout << RED << "Exiting Employer Menu..." << RESET << endl;
                 return; // Exit the loop and return
             default:
-                cout << "Invalid choice, please try again." << endl;
+                cout << RED << "Invalid choice, please try again." << RESET << endl;
                 break;
             }
         }
@@ -176,7 +176,7 @@ void login()
 
     case 3:
     {
-        cout << "Login Success (User)" << endl;
+        cout << "Login Successfully in User ..." << endl;
         User u1;
         int choice;
         while (1)
@@ -198,10 +198,10 @@ void login()
                 u1.generatebill(name); // pass the username
                 break;
             case 5:
-                cout << "Exiting User Menu..." << endl;
+                cout << RED << "Exiting User Menu..." << RESET << endl;
                 return; // Exit the loop and return
             default:
-                cout << "Invalid choice, please try again." << endl;
+                cout << RED << "Invalid choice, please try again." << RESET << endl;
                 break;
             }
         }
@@ -209,7 +209,7 @@ void login()
     }
 
     default:
-        cout << "Invalid login type. Exiting..." << endl;
+        cout << RED << "Invalid login type. Exiting..." << RESET << endl;
         break;
     }
 }
