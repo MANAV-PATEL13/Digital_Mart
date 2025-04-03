@@ -5,7 +5,7 @@
 #include "./../setting/color.h"
 #include "./../Data/login.h"
 #include "./../Data/create.h"
-//#include "./../Utility/utils.h"
+// #include "./../Utility/utils.h"
 
 using namespace std;
 
@@ -30,8 +30,6 @@ void welcome()
           << INVERSE << BOLD << "Press Enter..." << RESET << endl;
      cin.get(); // Waits for the user to press Enter
 }
-
-
 
 void menu()
 {
@@ -107,7 +105,7 @@ void project()
      menu();
 }
 
-#endif 
+#endif
 // HOME_H
 
 /*

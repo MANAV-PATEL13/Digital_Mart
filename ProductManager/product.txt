@@ -1,1 +1,2 @@
-tv	25000
+bluetooth	250
+tv	120000
