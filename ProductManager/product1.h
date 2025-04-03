@@ -35,7 +35,7 @@ public:
         ifstream file("./ProductManager/product.txt");
         if (!file)
         {
-            cout << "Error loading product file!" << endl;
+            cout << RED << "Error loading product file!" << RESET << endl;
             return;
         }
         string name;
@@ -54,19 +54,19 @@ public:
 
         if (cart.empty())
         {
-            cout << "No products available!" << endl;
+            cout << CYAN << "No products available!" << RESET << endl;
             return;
         }
 
-        cout << BLUE << "\n--------- Available Products -------------\n";
+        cout << CYAN << "\n----------- Available Products ------------\n";
         cout << left << setw(4) << "ID" << left << setw(30) << "Product Name" << left << setw(10) << "Price" << endl;
-        cout << BLUE << "-------------------------------------------\n"
+        cout << CYAN << "-------------------------------------------\n"
              << RESET;
         for (size_t i = 0; i < cart.size(); i++)
         {
             cout << setw(4) << (i + 1) << left << setw(30) << cart[i].first << left << setw(10) << cart[i].second << endl;
         }
-        cout << BLUE << "-------------------------------------------\n"
+        cout << CYAN << "-------------------------------------------\n"
              << RESET;
     }
 };
@@ -85,7 +85,7 @@ public:
 
         if (number < 1 || number > cart.size())
         { // Validate user input
-            cout << "Invalid product number!" << endl;
+            cout << RED << "Invalid product number!" << RESET << endl;
             return;
         }
 
@@ -106,8 +106,9 @@ public:
 
         // Add to order vector
         order.push_back(newItem);
-
-        cout << "Product added to your order!" << endl;
+        system("clear");
+        cout << MAGENTA <<"Product added to your order!" << RESET << endl;
+        viewproduct();
     }
 
     // View the user's current order
@@ -120,10 +121,10 @@ public:
             return;
         }
 
-        cout << "\n----------- Your Current Order -----------\n";
+        cout << YELLOW << "\n------------- Your Current Order -------------\n" ;
         cout << left << setw(20) << "Product" << setw(10) << "Quantity"
              << setw(10) << "Price" << setw(15) << "Total" << endl;
-        cout << "--------------------------------------------\n";
+        cout << "----------------------------------------------\n";
 
         double grandTotal = 0;
         for (const OrderItem &item : order)
@@ -135,8 +136,8 @@ public:
             grandTotal += item.totalPrice;
         }
 
-        cout << "----------------------------------------\n";
-        cout << "Grand Total: " << grandTotal << endl;
+        cout << "-----------------------------------------------\n" << RESET;
+        cout << CYAN << "Grand Total: " << grandTotal << RESET <<endl;
     }
 
     // Generate bill and save to file
@@ -144,7 +145,7 @@ public:
     {
         if (order.empty())
         {
-            cout << "No items in order to generate bill!" << endl;
+            cout << RED << "No items in order to generate bill!" << RESET << endl;
             return;
         }
 
@@ -185,7 +186,7 @@ public:
         }
         else
         {
-            cout << "Error updating the ID file!" << endl;
+            cout << RED <<"Error updating the ID file!" << RESET << endl;
             return;
         }
 
@@ -199,19 +200,19 @@ public:
         ofstream billFile(filename);
         if (!billFile)
         {
-            cout << "Error creating bill file!" << endl;
+            cout <<RED<< "Error creating bill file!" << RESET <<endl;
             return;
         }
 
         // Write bill header with bill ID and compile-time date & time
-        billFile << "========== BILL ==========\n";
+        billFile << "=================== BILL ====================\n";
         billFile << "Bill ID: " << id << billId << "\n";
         billFile << "Date & Time: " << __DATE__ << " " << __TIME__ << "\n";
         billFile << "User name : " << username << "\n";
-        billFile << "========================\n\n";
+        billFile << "==============================================\n\n";
         billFile << left << setw(20) << "Product" << setw(10) << "Quantity"
                  << setw(10) << "Price" << setw(15) << "Total" << endl;
-        billFile << "----------------------------------------\n";
+        billFile << "-----------------------------------------------\n";
 
         // Write order items
         double grandTotal = 0;
@@ -225,9 +226,9 @@ public:
         }
 
         // Write total
-        billFile << "----------------------------------------\n";
+        billFile << "-----------------------------------------------\n";
         billFile << "Grand Total: " << grandTotal << endl;
-        billFile << "========================\n";
+        billFile << "===============================================\n";
 
         billFile.close();
 
@@ -238,14 +239,14 @@ public:
             return;
         }
 
-        all << "================= BILL =================\n";
+        all << "===================== BILL ====================\n";
         all << "Bill ID: " << id << billId << "\n";
         all << "Date & Time: " << __DATE__ << " " << __TIME__ << "\n";
         all << "User name : " << username << "\n";
-        all << "========================================\n\n";
+        all << "===============================================\n\n";
         all << left << setw(20) << "Product" << setw(10) << "Quantity"
             << setw(10) << "Price" << setw(15) << "Total" << endl;
-        all << "----------------------------------------\n";
+        all << "-----------------------------------------------\n";
 
         // Write order items
 
@@ -258,14 +259,14 @@ public:
         }
 
         // Write total
-        all << "----------------------------------------\n";
+        all << "-----------------------------------------------\n";
         all << "Grand Total: " << grandTotal << endl;
-        all << "========================================\n\n";
+        all << "===============================================\n\n";
 
         all.close();
 
-        cout << "Bill generated successfully! Bill ID: " << id << endl;
-        cout << "Saved as: " << filename << endl;
+        cout << GREEN <<"Bill generated successfully! Bill ID: " << id << endl;
+        cout <<YELLOW << "Saved as: " << filename << RESET << endl;
 
         // Clear the order after generating bill
         order.clear();
@@ -283,13 +284,14 @@ public:
         ofstream file("./ProductManager/product.txt", ios::app);
         if (!file)
         {
-            cout << "Error opening file!" << endl;
+            cout << RED << "Error opening file!" << RESET << endl;
             return;
         }
         file << name << "\t" << price << endl;
         file.close();
 
-        cout << "Product added successfully!" << endl;
+        cout << MAGENTA <<"Product added successfully!" << RESET<< endl;
+        viewproduct();
     }
 
     void removeProduct()
@@ -311,7 +313,7 @@ public:
 
         // Remove the product from cart using the product number (adjust for 0-based index)
         cart.erase(cart.begin() + productNumber - 1);
-        cout << "Product removed successfully!" << endl;
+        cout << GREEN <<"Product removed successfully!" << RESET << endl;
 
         // Re-write the product file without the removed product
         ofstream file("./ProductManager/product.txt", ios::trunc);
@@ -328,7 +330,9 @@ public:
         }
 
         file.close();
-        cout << "Product list updated in the file." << endl;
+        system("clear");
+        cout << GREEN <<"Product list updated in the file." << RESET << endl;
+        viewproduct();
     }
 
     void manageUsers()
@@ -367,7 +371,7 @@ public:
 
         if (userFound)
         {
-            cout << "User '" << username << "' removed successfully." << endl;
+            cout << YELLOW << "User '" << username << "' removed successfully." << RESET <<endl;
         }
         else
         {
@@ -397,7 +401,7 @@ public:
             // Append employee credentials to the file
             employeeFile << employ << " " << password << endl;
             employeeFile.close();
-            cout << "Employee '" << employ << "' added successfully." << endl;
+            cout << GREEN <<"Employee '" << employ << "' added successfully." << RESET << endl;
         }
         else
         {
@@ -441,7 +445,7 @@ public:
 
         if (userFound)
         {
-            cout << "User '" << employ << "' removed successfully." << endl;
+            cout << GREEN << "User '" << employ << "' removed successfully." << RESET << endl;
         }
         else
         {

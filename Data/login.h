@@ -26,14 +26,16 @@ void login()
     char name[50], password[10];
     char su[50], pass[10];
     int loginType = 0; // 1 = admin, 2 = employee, 3 = user
+    int attempts = 0;
 
     // Login loop for retry on invalid input
-    while (loginType == 0)
+    while (loginType == 0 && attempts < 3)
     {
         cout << "Enter your username: ";
         cin >> name;
         cout << "Enter your password: ";
         cin >> password;
+        attempts++;
 
         ifstream adminfile("./Data/Admin/admin.txt");
         if (!adminfile)
@@ -77,10 +79,16 @@ void login()
         }
 
         // Check the login type
-        if (loginType == 0)
-        {
-            cout << "Invalid username or password. Please try again." << endl;
+        if (loginType == 0) {
+            cout << RED<< "Invalid username or password. "<< RESET;
+            if (attempts < 3) {
+                cout << GREEN << "Please try again.\n" << RESET;
+            } else {
+                cout << RED << "Maximum attempts reached. Exiting...\n" << RESET;
+                system("PAUSE");
+            }
         }
+    
     }
 
     // Depending on the login type, display the appropriate message and show the relevant menu
@@ -176,7 +184,7 @@ void login()
 
     case 3:
     {
-        cout << "Login Successfully in User ..." << endl;
+        cout << GREEN <<"Login Successfully in User ..." << RESET <<endl;
         User u1;
         int choice;
         while (1)
