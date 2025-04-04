@@ -5,15 +5,12 @@
 #include "./../setting/color.h"
 #include "./../Data/login.h"
 #include "./../Data/create.h"
-// #include "./../Utility/utils.h"
 
 using namespace std;
 
 void welcome()
 {
-     cout << "Welcome to " << CYAN << "Digital Mart" << RESET
-          << endl
-          << endl;
+     cout << "Welcome to " << CYAN << "Digital Mart" << RESET << endl << endl;
 
      cout << "Your one-stop shop for all essentials at the best prices! From daily groceries to stationery,\n snacks to self-care products, we have got everything you need all under one roof."
           << "" << endl
@@ -35,13 +32,11 @@ void menu()
 {
      while (1)
      {
-
           cout << LOGO_head;
           cout << "1. Login" << endl
                << "2. Create Account" << endl
                << RED << "3. Exit" << endl
                << RESET;
-
           cout << endl
                << "Enter your choice: ";
           int choice;
@@ -66,7 +61,6 @@ void menu()
                break;
 
           case 3:
-
                cout << ""
                     << "THANK YOU FOR SHOPPING AT" << YELLOW << " AI Wallah " << RESET
                     << "We appreciate your visit and hope you had a smooth and enjoyable shopping experience.\n"
@@ -92,26 +86,13 @@ void menu()
                     << RESET;
                break;
           }
-          // if (choice == 3)
-          //      return;
      }
 }
-
 void project()
 {
      welcome();
      system("clear");
-
      menu();
 }
 
 #endif
-// HOME_H
-
-/*
-
-cout << endl << endl << endl  << endl << endl;
-     cout << INVERSE << BOLD << "Press Enter to exit..." << RESET << endl;
-     cin.get(); // Waits for the user to press Enter
-
-*/

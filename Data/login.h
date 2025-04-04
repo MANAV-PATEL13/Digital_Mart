@@ -19,7 +19,6 @@ void createAdminFile()
         cout << "Admin file created with default credentials." << endl;
     }
 }
-
 // Function to handle the login process
 void login()
 {
@@ -53,7 +52,6 @@ void login()
                 loginType = 1; // Admin login
             }
         }
-
         ifstream employfile("./Data/Employer/employ.txt");
         if (employfile)
         {
@@ -64,7 +62,6 @@ void login()
             }
             employfile.close();
         }
-
         ifstream userfile("./Data/User/Userdata.txt");
         if (userfile)
         {
@@ -77,7 +74,6 @@ void login()
             }
             userfile.close();
         }
-
         // Check the login type
         if (loginType == 0) {
             cout << RED<< "Invalid username or password. "<< RESET;
@@ -87,10 +83,8 @@ void login()
                 cout << RED << "Maximum attempts reached. Exiting...\n" << RESET;
                 system("PAUSE");
             }
-        }
-    
+        }    
     }
-
     // Depending on the login type, display the appropriate message and show the relevant menu
     switch (loginType)
     {
@@ -141,7 +135,6 @@ void login()
         }
         break;
     }
-
     case 2:
     {
         cout << GREEN << "Login Successfully in Employer ..." << RESET << endl;
@@ -181,7 +174,6 @@ void login()
         }
         break;
     }
-
     case 3:
     {
         cout << GREEN <<"Login Successfully in User ..." << RESET <<endl;
@@ -215,7 +207,6 @@ void login()
         }
         break;
     }
-
     default:
         cout << RED << "Invalid login type. Exiting..." << RESET << endl;
         break;

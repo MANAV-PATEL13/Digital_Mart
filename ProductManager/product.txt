@@ -16,3 +16,4 @@ cheese	55
 chocolate	40
 Table-Chair	7500
 Scale	10
+Textbook	40

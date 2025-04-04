@@ -9,10 +9,8 @@
 #include <iomanip> // For formatted output
 
 using namespace std;
-
 double grandTotal = 0;
 int id;
-
 // Struct to store order details
 struct OrderItem
 {
@@ -21,7 +19,6 @@ struct OrderItem
     int price;         // Price per unit
     double totalPrice; // Total price for this item (quantity * price)
 };
-
 class Product
 {
 public:
@@ -46,7 +43,6 @@ public:
         }
         file.close();
     }
-
     // Display all products
     void viewproduct()
     {
@@ -57,7 +53,6 @@ public:
             cout << CYAN << "No products available!" << RESET << endl;
             return;
         }
-
         cout << CYAN << "\n----------- Available Products ------------\n";
         cout << left << setw(4) << "ID" << left << setw(30) << "Product Name" << left << setw(10) << "Price" << endl;
         cout << CYAN << "-------------------------------------------\n"
@@ -70,7 +65,6 @@ public:
              << RESET;
     }
 };
-
 class User : public Product
 {
 public:
@@ -88,10 +82,8 @@ public:
             cout << RED << "Invalid product number!" << RESET << endl;
             return;
         }
-
         cout << "Enter quantity: ";
         cin >> quantity;
-
         // Get the price for the selected product
         int price = cart[number - 1].second;
 
@@ -110,7 +102,6 @@ public:
         cout << MAGENTA <<"Product added to your order!" << RESET << endl;
         viewproduct();
     }
-
     // View the user's current order
     void Vieworder()
     {
@@ -139,7 +130,6 @@ public:
         cout << "-----------------------------------------------\n" << RESET;
         cout << CYAN << "Grand Total: " << grandTotal << RESET <<endl;
     }
-
     // Generate bill and save to file
     void generatebill(string username)
     {
@@ -148,12 +138,10 @@ public:
             cout << RED << "No items in order to generate bill!" << RESET << endl;
             return;
         }
-
         // Generate unique bill ID using compile-time macros (__TIME__ and __DATE__)
         string billId = __TIME__; // Time in HH:MM:SS format
         billId += "_";
         billId += __DATE__; // Date in Mmm DD YYYY format
-
         // Replace spaces and colons with underscores and hyphens
         for (char &c : billId)
         {
@@ -162,7 +150,6 @@ public:
             if (c == ':')
                 c = '-'; // Replace colon with hyphen
         }
-
         billId = "_" + billId;
 
         // Read the last ID from the file (if it exists) or initialize to 1
@@ -189,13 +176,10 @@ public:
             cout << RED <<"Error updating the ID file!" << RESET << endl;
             return;
         }
-
         // Create filename with bill ID and incremented ID
         string filename = "./Bills/bill_" + to_string(id) + billId + ".txt";
-
         // Create bills directory if it doesn't exist
         system("mkdir -p ./Bills");
-
         // Open file for writing
         ofstream billFile(filename);
         if (!billFile)
@@ -203,7 +187,6 @@ public:
             cout <<RED<< "Error creating bill file!" << RESET <<endl;
             return;
         }
-
         // Write bill header with bill ID and compile-time date & time
         billFile << "=================== BILL ====================\n";
         billFile << "Bill ID: " << id << billId << "\n";
@@ -213,7 +196,6 @@ public:
         billFile << left << setw(20) << "Product" << setw(10) << "Quantity"
                  << setw(10) << "Price" << setw(15) << "Total" << endl;
         billFile << "-----------------------------------------------\n";
-
         // Write order items
         double grandTotal = 0;
         for (const OrderItem &item : order)
@@ -224,21 +206,17 @@ public:
                      << setw(15) << item.totalPrice << endl;
             grandTotal += item.totalPrice;
         }
-
         // Write total
         billFile << "-----------------------------------------------\n";
         billFile << "Grand Total: " << grandTotal << endl;
         billFile << "===============================================\n";
-
         billFile.close();
-
         ofstream all("./Bills/all_bills.txt", ios::app);
         if (!all)
         {
             cout << "Error creating bill file!" << endl;
             return;
         }
-
         all << "===================== BILL ====================\n";
         all << "Bill ID: " << id << billId << "\n";
         all << "Date & Time: " << __DATE__ << " " << __TIME__ << "\n";
@@ -247,9 +225,7 @@ public:
         all << left << setw(20) << "Product" << setw(10) << "Quantity"
             << setw(10) << "Price" << setw(15) << "Total" << endl;
         all << "-----------------------------------------------\n";
-
         // Write order items
-
         for (const OrderItem &item : order)
         {
             all << left << setw(20) << item.productName
@@ -257,14 +233,11 @@ public:
                 << setw(10) << item.price
                 << setw(15) << item.totalPrice << endl;
         }
-
         // Write total
         all << "-----------------------------------------------\n";
         all << "Grand Total: " << grandTotal << endl;
         all << "===============================================\n\n";
-
         all.close();
-
         cout << GREEN <<"Bill generated successfully! Bill ID: " << id << endl;
         cout <<YELLOW << "Saved as: " << filename << RESET << endl;
 
@@ -272,7 +245,6 @@ public:
         order.clear();
     }
 };
-
 class Employee : public Product
 {
 public:
@@ -293,13 +265,10 @@ public:
         cout << MAGENTA <<"Product added successfully!" << RESET<< endl;
         viewproduct();
     }
-
     void removeProduct()
     {
         // Display the list of products before removal
-
         viewproduct(); // Just call the viewproduct() method to display products
-
         int productNumber;
         cout << "Enter the number of the product to remove: ";
         cin >> productNumber;
@@ -310,19 +279,15 @@ public:
             cout << "Invalid product number!" << endl;
             return;
         }
-
         // Remove the product from cart using the product number (adjust for 0-based index)
         cart.erase(cart.begin() + productNumber - 1);
         cout << GREEN <<"Product removed successfully!" << RESET << endl;
-
         // Re-write the product file without the removed product
         ofstream file("./ProductManager/product.txt", ios::trunc);
         if (!file)
         {
             cout << "Error opening product file!" << endl;
-            return;
-        }
-
+            return;        }
         // Write the updated list of products back to the file
         for (const auto &p : cart)
         {
@@ -334,7 +299,6 @@ public:
         cout << GREEN <<"Product list updated in the file." << RESET << endl;
         viewproduct();
     }
-
     void manageUsers()
     {
 
@@ -379,7 +343,6 @@ public:
         }
     }
 };
-
 class Admin : public Employee
 {
 public:
@@ -408,7 +371,6 @@ public:
             cout << "Failed to open employee file." << endl;
         }
     }
-
     void manage_employ()
     {
 
@@ -453,5 +415,4 @@ public:
         }
     }
 };
-
 #endif
