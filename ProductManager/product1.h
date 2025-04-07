@@ -237,6 +237,7 @@ public:
         all << "-----------------------------------------------\n";
         all << "Grand Total: " << grandTotal << endl;
         all << "===============================================\n\n";
+        all << "-------------------------------------- Bill ID: " << id << billId  << " --------------------------------------" << endl;
         all.close();
         cout << GREEN <<"Bill generated successfully! Bill ID: " << id << endl;
         cout <<YELLOW << "Saved as: " << filename << RESET << endl;
