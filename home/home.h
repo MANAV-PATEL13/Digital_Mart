@@ -45,19 +45,19 @@ void menu()
           switch (choice)
           {
           case 1:
-               system("clear");
+               system("cls");
                cout << GREEN << "logging........\n"
                     << RESET;
                login();
-               system("clear");
+               system("cls");
                break;
 
           case 2:
-               system("clear");
+               system("cls");
                cout << GREEN << "createing account........\n"
                     << RESET;
                createAccount();
-               system("clear");
+               system("cls");
                break;
 
           case 3:
@@ -91,7 +91,7 @@ void menu()
 void project()
 {
      welcome();
-     system("clear");
+     system("cls");
      menu();
 }
 

@@ -296,7 +296,7 @@ public:
         }
 
         file.close();
-        system("clear");
+        system("cls");
         cout << GREEN <<"Product list updated in the file." << RESET << endl;
         viewproduct();
     }
